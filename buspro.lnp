@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"buspro.obj" 
+TO "buspro" 
+RAMSIZE(256) 

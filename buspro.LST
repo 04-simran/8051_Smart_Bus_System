@@ -1,0 +1,282 @@
+C51 COMPILER V9.60.7.0   BUSPRO                                                            04/02/2025 12:19:38 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BUSPRO
+OBJECT MODULE PLACED IN buspro.OBJ
+COMPILER INVOKED BY: D:\C51\BIN\C51.EXE buspro.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include<reg51.h>
+   2          
+   3          char stops[][10]={"Stop 1","Stop 2","Stop 3","Stop 4","Stop 5"};
+   4          int i,distance[]={50,40,30,20,10};
+   5          int currentstop=0;
+   6          int stopno[1];
+   7          sbit rs=P0^5;
+   8          sbit rw=P0^6;
+   9          sbit en=P0^7;
+  10          #define data_line P2
+  11          
+  12          sbit r0=P3^0;
+  13          sbit r1=P3^1;
+  14          sbit r2=P3^2;
+  15          sbit r3=P3^3;
+  16          sbit c0=P3^4;
+  17          sbit c1=P3^5;
+  18          sbit c2=P3^6;
+  19          sbit c3=P3^7;
+  20          
+  21          sbit in1=P1^1;
+  22          sbit in2=P1^2;
+  23          
+  24          sbit led1=P1^3;
+  25          sbit led2=P1^4;
+  26          sbit led3=P1^6;
+  27          
+  28          void lcd_init(void);
+  29          void lcd_data(unsigned char);
+  30          void lcd_cmd(unsigned char);
+  31          void lcd_string(unsigned char *);
+  32          void delay(int);
+  33          void motor_on(void);
+  34          void motor_of(void);
+  35          
+  36          
+  37          
+  38          void main()
+  39          {
+  40   1        unsigned char str[14]="WELCOME TO BUS";
+  41   1        unsigned char str1[15]="Enter the Bus";
+  42   1        lcd_init();
+  43   1        lcd_string(str);
+  44   1        delay(50);
+  45   1        lcd_cmd(0Xc0);
+  46   1        lcd_string(str1);
+  47   1        delay(50);
+  48   1        lcd_cmd(0X01);
+  49   1        led1=0;
+  50   1        led2=1;
+  51   1        led3=0;
+  52   1        while(1)
+  53   1        {
+  54   2          r0=0;
+  55   2          r1=r2=1;
+C51 COMPILER V9.60.7.0   BUSPRO                                                            04/02/2025 12:19:38 PAGE 2   
+
+  56   2          if(c0==0)
+  57   2          {
+  58   3            lcd_data('1');
+  59   3            stopno[i]=1;
+  60   3            delay(100);
+  61   3            if(led2==1)
+  62   3            {
+  63   4            delay(100);
+  64   4            motor_on();
+  65   4              delay(200);
+  66   4              motor_of();
+  67   4            }
+  68   3         }
+  69   2          r0=0;
+  70   2          r1=r2=1;
+  71   2          if(c1==0)
+  72   2          {
+  73   3            lcd_data('2');
+  74   3            stopno[i]=2;
+  75   3            delay(50);
+  76   3            if(led2==1)
+  77   3            {
+  78   4            motor_on();
+  79   4              delay(500);
+  80   4              motor_of();
+  81   4      
+  82   4            }
+  83   3          }
+  84   2          r0=0;
+  85   2          r1=r2=1;
+  86   2          if(c2==0)
+  87   2          {
+  88   3            lcd_data('3');
+  89   3            stopno[i]=3;
+  90   3            delay(50);
+  91   3            if(led2==1)
+  92   3            {
+  93   4            motor_on();
+  94   4              delay(500);
+  95   4              motor_of();
+  96   4            }
+  97   3          }
+  98   2              r1=0;
+  99   2          r0=r2=1;
+ 100   2          if(c0==0)
+ 101   2          {
+ 102   3            lcd_data('4');
+ 103   3            stopno[i]=4;
+ 104   3            delay(50);
+ 105   3            if(led2==1)
+ 106   3            {
+ 107   4            motor_on();
+ 108   4              delay(500);
+ 109   4              motor_of();
+ 110   4            }
+ 111   3          }
+ 112   2              r1=0;
+ 113   2          r0=r2=1;
+ 114   2          /*if(c1==0)
+ 115   2          {
+ 116   2            lcd_data('5');
+ 117   2            stopno[i]=5;
+C51 COMPILER V9.60.7.0   BUSPRO                                                            04/02/2025 12:19:38 PAGE 3   
+
+ 118   2            delay(50);
+ 119   2            if(led1==1)
+ 120   2            {
+ 121   2            motor_on();
+ 122   2            }
+ 123   2        
+ 124   2          }*/
+ 125   2          r1=0;
+ 126   2          r0=r2=1;
+ 127   2          if(c2==0)
+ 128   2          {
+ 129   3            lcd_data('6');
+ 130   3            delay(50);
+ 131   3            if(led1==1)
+ 132   3            {
+ 133   4            motor_on();
+ 134   4            }
+ 135   3          }
+ 136   2              r2=0;
+ 137   2          r1=r0=1;
+ 138   2          if(c0==0)
+ 139   2          {
+ 140   3            lcd_data('7');
+ 141   3            delay(50);
+ 142   3            if(led1==1)
+ 143   3            {
+ 144   4            motor_on();
+ 145   4            }
+ 146   3          }
+ 147   2          r2=0;
+ 148   2          r1=r0=1;
+ 149   2          if(c1==0)
+ 150   2          {
+ 151   3            lcd_data('8');
+ 152   3            delay(50);
+ 153   3            if(led1==1)
+ 154   3            {
+ 155   4            motor_on();
+ 156   4            }
+ 157   3            
+ 158   3          }
+ 159   2          r2=0;
+ 160   2          r1=r0=1;
+ 161   2          if(c2==0)
+ 162   2          {
+ 163   3            lcd_data('9');
+ 164   3            delay(50);
+ 165   3            if(led1==1)
+ 166   3            {
+ 167   4            motor_on();
+ 168   4            }
+ 169   3          }
+ 170   2          delay(200);
+ 171   2          
+ 172   2          while(currentstop<stopno[i])
+ 173   2        {
+ 174   3          lcd_cmd(0x01);
+ 175   3          //lcd_string("CURRENT STOP");
+ 176   3          //lcd_cmd(0xc0);
+ 177   3          lcd_string(stops[currentstop]);
+ 178   3          lcd_cmd(0xc0);
+ 179   3          lcd_string("Dist");
+C51 COMPILER V9.60.7.0   BUSPRO                                                            04/02/2025 12:19:38 PAGE 4   
+
+ 180   3          lcd_data(distance[currentstop]/10+'0');
+ 181   3          lcd_data(distance[currentstop]%10+'0');
+ 182   3          lcd_string("km");
+ 183   3          
+ 184   3          delay(3000);
+ 185   3          currentstop++;
+ 186   3          if(currentstop==stopno[i])
+ 187   3          {
+ 188   4            delay(100);
+ 189   4            lcd_cmd(0x01);
+ 190   4            lcd_cmd(0X80);
+ 191   4            lcd_string("Arrived");
+ 192   4            led3=1;
+ 193   4          }
+ 194   3          
+ 195   3        }
+ 196   2          }
+ 197   1        }
+ 198          void lcd_init(void)
+ 199          {
+ 200   1        lcd_cmd(0x30);
+ 201   1        lcd_cmd(0x38);
+ 202   1        lcd_cmd(0x01);
+ 203   1        lcd_cmd(0x0c);
+ 204   1        lcd_cmd(0x80);
+ 205   1      }
+ 206          
+ 207          void lcd_cmd(unsigned char c)
+ 208          {
+ 209   1        data_line=c;
+ 210   1        rs=0;
+ 211   1        rw=0;
+ 212   1        en=1;
+ 213   1        delay(50);
+ 214   1        en=0;
+ 215   1      }
+ 216          void lcd_data(unsigned char c)
+ 217          {
+ 218   1        data_line=c;
+ 219   1        rs=1;
+ 220   1        rw=0;
+ 221   1        en=1;
+ 222   1        delay(50);
+ 223   1        en=0;
+ 224   1      }
+ 225          void delay(int t)
+ 226          {
+ 227   1        int i,j;
+ 228   1        for(i=0;i<t;i++)
+ 229   1        {
+ 230   2          for(j=0;j<300;j++);
+ 231   2        }
+ 232   1      }
+ 233          void lcd_string(unsigned char *p)
+ 234          {
+ 235   1        while(*p!='\0')
+ 236   1        {
+ 237   2          lcd_data(*p);
+ 238   2          p++;
+ 239   2        }
+ 240   1      }
+ 241          
+C51 COMPILER V9.60.7.0   BUSPRO                                                            04/02/2025 12:19:38 PAGE 5   
+
+ 242          void motor_on(void)
+ 243          {
+ 244   1        in1=1;
+ 245   1        in2=0;
+ 246   1      }
+ 247          void motor_of(void)
+ 248          {
+ 249   1        in1=0;
+ 250   1        in2=0;
+ 251   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    706    ----
+   CONSTANT SIZE    =     45    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     66      32
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
